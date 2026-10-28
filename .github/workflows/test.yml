@@ -1,0 +1,40 @@
+name: Validate and render Instagram reel
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser and ffmpeg
+        run: |
+          python -m pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Validate skill and automated tests
+        env:
+          REELS_BROWSER_TEST: '1'
+        run: |
+          python instagram-reels/scripts/check.py
+          python -m unittest discover -s tests -v
+      - name: Render actual short Reel with audio and contact sheet
+        run: |
+          python instagram-reels/scripts/render.py --duration 2 --fps 12 --width 360 --height 640 --output output/silent.mp4
+          python instagram-reels/scripts/contact_sheet.py --duration 3 --step 1 --output output/contact-sheet.png
+          python instagram-reels/scripts/render.py --duration 1 --fps 5 --width 1080 --height 1920 --output output/fullsize-smoke.mp4
+          python instagram-reels/scripts/verify.py output/fullsize-smoke.mp4 --width 1080 --height 1920 --no-audio
+          python instagram-reels/scripts/audio_synth.py --output output/effects.wav
+          python instagram-reels/scripts/mux.py --video output/silent.mp4 --effects output/effects.wav --output output/reel.mp4
+          python instagram-reels/scripts/verify.py output/reel.mp4 --width 360 --height 640
+      - name: Preserve real preview artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: reel-smoke-test
+          path: |
+            output/reel.mp4
+            output/contact-sheet.png

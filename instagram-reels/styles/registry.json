@@ -1,0 +1,146 @@
+[
+  {
+    "id": "warm-editorial",
+    "name": "Warm Editorial Product",
+    "palette": {
+      "background": "#F5EFE6",
+      "foreground": "#173D35",
+      "accent": "#D96D5F",
+      "secondary": "#9FD8B5"
+    },
+    "use": "Founder-facing breakdowns, AI workflow explanations, product launches",
+    "file": "warm-editorial.md"
+  },
+  {
+    "id": "kinetic-whiteboard",
+    "name": "Kinetic Whiteboard Notes",
+    "palette": {
+      "background": "#F7F7F3",
+      "foreground": "#171819",
+      "accent": "#C44536",
+      "secondary": "#D1D3D3"
+    },
+    "use": "Faceless tutorials, captions-first education, product explanation",
+    "file": "kinetic-whiteboard.md"
+  },
+  {
+    "id": "premium-paper-cut",
+    "name": "Premium Paper-Cut Storybook",
+    "palette": {
+      "background": "#F7EBD5",
+      "foreground": "#3B5348",
+      "accent": "#C67A62",
+      "secondary": "#E4BE76"
+    },
+    "use": "Narrative shorts, culture, character storytelling, evocative explainers",
+    "file": "premium-paper-cut.md"
+  },
+  {
+    "id": "pixel-quest",
+    "name": "Pixel Quest Story",
+    "palette": {
+      "background": "#E9E2CE",
+      "foreground": "#352B45",
+      "accent": "#7B60B5",
+      "secondary": "#DFA64A"
+    },
+    "use": "Product tutorials, progress stories, levels/stages, skill lists",
+    "file": "pixel-quest.md"
+  },
+  {
+    "id": "blueprint-logic",
+    "name": "Blueprint Logic",
+    "palette": {
+      "background": "#101F33",
+      "foreground": "#E9EFF5",
+      "accent": "#4CC6DC",
+      "secondary": "#F3B667"
+    },
+    "use": "Engineering concepts, product architecture, AI diagrams, step-by-step mechanics",
+    "file": "blueprint-logic.md"
+  },
+  {
+    "id": "proof-montage",
+    "name": "Source Proof Montage",
+    "palette": {
+      "background": "#F3F0E9",
+      "foreground": "#181A1A",
+      "accent": "#A33B38",
+      "secondary": "#D9CBA9"
+    },
+    "use": "News evidence, research reels, verified product analysis, audit videos",
+    "file": "proof-montage.md"
+  },
+  {
+    "id": "graphic-novel",
+    "name": "Graphic Novel Halftone",
+    "palette": {
+      "background": "#F6ECD8",
+      "foreground": "#1D1B19",
+      "accent": "#D34436",
+      "secondary": "#F3C949"
+    },
+    "use": "Character explainers, stories, comparisons, playful business reels",
+    "file": "graphic-novel.md"
+  },
+  {
+    "id": "clean-product-ui",
+    "name": "Clean Product UI",
+    "palette": {
+      "background": "#F6F8FA",
+      "foreground": "#122D33",
+      "accent": "#3E9386",
+      "secondary": "#E4B46B"
+    },
+    "use": "Software tutorials, startup apps, AI agents, feature demos",
+    "file": "clean-product-ui.md"
+  },
+  {
+    "id": "type-driven",
+    "name": "Type-Driven Studio",
+    "palette": {
+      "background": "#111217",
+      "foreground": "#F4F2ED",
+      "accent": "#DB8B61",
+      "secondary": "#9A9BB0"
+    },
+    "use": "Lyric typography, trend lists, strong intro hooks, manifesto shorts",
+    "file": "type-driven.md"
+  },
+  {
+    "id": "soft-clay",
+    "name": "Soft Clay Infographics",
+    "palette": {
+      "background": "#F3EBDD",
+      "foreground": "#2C433F",
+      "accent": "#ED8E6A",
+      "secondary": "#B1CFB1"
+    },
+    "use": "Friendly educational shorts, wellness explanations, product metaphors",
+    "file": "soft-clay.md"
+  },
+  {
+    "id": "cinematic-luxe",
+    "name": "Cinematic Luxe Title",
+    "palette": {
+      "background": "#131519",
+      "foreground": "#E9E8E2",
+      "accent": "#B69A66",
+      "secondary": "#58666F"
+    },
+    "use": "Premium product unveil, branding, cinematic teasers",
+    "file": "cinematic-luxe.md"
+  },
+  {
+    "id": "map-journey",
+    "name": "Illustrated Journey Map",
+    "palette": {
+      "background": "#F8EDD8",
+      "foreground": "#264F49",
+      "accent": "#CF7556",
+      "secondary": "#93B8AC"
+    },
+    "use": "Travel reels, launch distribution maps, historical journeys",
+    "file": "map-journey.md"
+  }
+]

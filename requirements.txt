@@ -1,0 +1,2 @@
+# Python 3.10+; FFmpeg and ffprobe are separate system dependencies.
+playwright>=1.56,<2.0

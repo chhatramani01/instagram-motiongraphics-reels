@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Instagram Motion Graphics Reels — design demo</title>
+<style>html,body{margin:0;min-height:100%;background:#202523;display:grid;place-items:center}canvas{width:min(100vw,56.25vh);height:auto;max-height:100vh;aspect-ratio:9/16;box-shadow:0 16px 90px #0005}</style></head>
+<body><canvas width="1080" height="1920" aria-label="Animated Instagram reel preview"></canvas>
+<script>
+(()=>{
+'use strict';
+const canvas=document.querySelector('canvas'),g=canvas.getContext('2d',{alpha:false});
+const C={paper:'#F5EFE6',paper2:'#E9E1D5',forest:'#173D35',dark:'#172523',mint:'#9FD8B5',coral:'#D96D5F',gold:'#F4C84A',muted:'#6B7870',white:'#FFF8EF'};
+const D=12;
+window.DURATION=D;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const out=x=>1-Math.pow(1-clamp(x),3);
+const smooth=x=>{x=clamp(x);return x*x*(3-2*x)};
+const range=(t,start,duration)=>smooth((t-start)/duration);
+const spring=(t)=>{if(t<=0)return 0;const w=15,z=.82,wd=w*Math.sqrt(1-z*z);return 1-Math.exp(-z*w*t)*(Math.cos(wd*t)+z*w/wd*Math.sin(wd*t))};
+function text(s,x,y,size=65,color=C.forest,weight='700',font='system-ui',align='left'){
+ g.textAlign=align;g.textBaseline='alphabetic';g.fillStyle=color;g.font=weight+' '+size+'px '+font;g.fillText(s,x,y);
+}
+function rounded(x,y,w,h,r,fill,stroke=null,line=2){g.beginPath();g.roundRect(x,y,w,h,r);g.fillStyle=fill;g.fill();if(stroke){g.strokeStyle=stroke;g.lineWidth=line;g.stroke()}}
+function line(x1,y1,x2,y2,color=C.forest,width=3){g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.strokeStyle=color;g.lineWidth=width;g.stroke()}
+function circle(x,y,r,fill){g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fillStyle=fill;g.fill()}
+function arrow(x1,y1,x2,y2,p,color=C.forest,width=6){p=clamp(p);const x=x1+(x2-x1)*p,y=y1+(y2-y1)*p;line(x1,y1,x,y,color,width);if(p>.90){g.save();g.translate(x,y);g.rotate(Math.atan2(y2-y1,x2-x1));line(-15,-11,0,0,color,width);line(-15,11,0,0,color,width);g.restore()}}
+function base(t,chapter){
+ g.fillStyle=C.paper;g.fillRect(0,0,1080,1920);
+ // Restrained tactile paper fiber detail: same deterministic placement on every call.
+ g.fillStyle='#C6C4B6';for(let i=0;i<70;i++){const x=(i*173+37)%1080,y=(i*311+89)%1920;g.globalAlpha=.075;g.fillRect(x,y,1.5,4)}g.globalAlpha=1;
+ rounded(90,148,13,41,5,C.coral);
+ text('MOTION   /   INSTAGRAM STUDIO',120,176,26,C.forest,'650');
+ text('FIELD NOTE  001',90,250,24,C.muted,'600','monospace');
+ rounded(90,276,900,4,1,C.paper2);
+ rounded(90,276,900*clamp(t/D),4,1,C.coral);
+ line(90,1604,990,1604,C.paper2,4);
+ text(chapter.toUpperCase(),90,1660,24,C.muted,'650','monospace');
+ text('DESIGNED WITH CODE   •   9:16',90,1758,24,C.muted,'500','monospace');
+ text(('0'+Math.floor(Math.min(D-.01,t))).slice(-2)+' / 12',990,1758,24,C.muted,'500','monospace','right');
+}
+function hook(t){
+ const p=range(t,-.28,.56),q=range(t,-.15,.65);
+ g.save();g.translate(90+(1-p)*75,0);g.globalAlpha=p;
+ text('YOUR REEL',0,550,75,C.muted,'700');
+ text('IS NOT',0,708,151,C.forest,'900');
+ text('A SLIDE.',0,895,150,C.forest,'900');g.restore();
+ const b=range(t,.55,.6);g.save();g.translate(90,0);g.rotate(-.027);rounded(0,984,785*b,108,12,C.mint);g.restore();
+ g.save();g.globalAlpha=q; text('It should EXPLAIN through motion.',112,1061,38,C.forest,'650');g.restore();
+ const progress=range(t,.8,.55);
+ circle(176,1332,66,C.coral);circle(176,1332,37,C.white);
+ arrow(270,1332,786,1332,progress,C.forest,9);
+ const s=spring(t-1.16);g.save();g.translate(810,1332);g.scale(.85+.15*s,.85+.15*s);
+ rounded(-108,-104,213,213,38,C.forest);text('✓',0,49,145,C.white,'800','system-ui','center');g.restore();
+}
+function split(t){
+ const p=range(t,2.05,.52),q=range(t,2.60,.55);
+ text('FROM STATIC',90,510,94,C.forest,'900');text('TO A STORY',90,646,94,C.coral,'900');
+ g.save();g.translate((1-p)*-85,0);g.globalAlpha=p;
+ rounded(90,784,416,492,29,C.white,'#D9D5CB');
+ text('SLIDES',127,866,41,C.muted,'700');
+ rounded(132,934,326,36,4,C.paper2);rounded(132,1006,288,22,4,C.paper2);rounded(132,1051,240,22,4,C.paper2);
+ circle(298,1183,22,C.coral);text('✕',298,1196,35,C.white,'800','system-ui','center');g.restore();
+ g.save();g.globalAlpha=q;g.translate((1-q)*96,0);
+ rounded(551,784,439,492,29,C.forest);
+ text('STORY',590,868,41,C.white,'700');
+ for(let i=0;i<3;i++){const xp=623+i*113;circle(xp,1044,28,i===1?C.coral:C.mint);if(i<2)arrow(xp+35,1044,xp+80,1044,range(t,2.75+i*.16,.25),C.white,5)}
+ text('CAUSE  →  EFFECT',592,1195,35,C.white,'600');g.restore();
+ const rev=range(t,3.12,.5);text('One action earns the next.',96,1438,47,C.forest,'700');
+ line(96,1460,96+880*rev,1460,C.coral,7);
+}
+function steps(t){
+ text('ONE IDEA',90,480,122,C.forest,'900');text('PER BEAT.',90,625,124,C.coral,'900');
+ const labels=['HOOK','PROOF','PAYOFF'];
+ const starts=[4.1,4.7,5.35];
+ for(let i=0;i<3;i++){
+ const p=range(t,starts[i],.45),x=122+i*293,y=990;
+ g.save();g.globalAlpha=p;g.translate(0,(1-p)*42);
+ circle(x+102,y,85,i===0?C.coral:(i===1?C.mint:C.forest));
+ text('0'+(i+1),x+102,y+21,55,i===1?C.forest:C.white,'800','system-ui','center');
+ text(labels[i],x+102,1155,35,C.forest,'800','system-ui','center');g.restore();
+ if(i<2)arrow(x+192,y,x+245,y,range(t,starts[i]+.45,.34),C.forest,7);
+ }
+ const active=Math.floor((t-4)/.75);
+ rounded(90,1282,900,122,22,C.paper2);
+ const messages=['Hook = a visual question.','Proof = visible mechanism.','Payoff = resolved insight.'];
+ text(messages[Math.max(0,Math.min(2,active))],125,1358,38,C.forest,'700');
+}
+function mechanism(t){
+ text('MAKE THE',90,510,103,C.forest,'900');text('IDEA VISIBLE.',90,637,96,C.coral,'900');
+ const p=range(t,6.55,.5),q=range(t,7.30,.58),r=range(t,8.15,.55);
+ g.save();g.globalAlpha=p;rounded(90,793,430,260,30,C.white,'#E0D7CA');text('INPUT',129,886,45,C.forest,'750');
+ text('one clear claim',129,958,35,C.muted,'650');g.restore();
+ arrow(513,937,763,937,q,C.coral,12);
+ g.save();g.globalAlpha=r;rounded(755,796,232,285,35,C.forest);circle(873,900,48,C.mint);text('✓',873,919,59,C.forest,'900','system-ui','center');text('PROOF',873,1022,39,C.white,'750','system-ui','center');g.restore();
+ const x=range(t,8.75,.5);
+ rounded(91,1253,900,100,20,C.mint);
+ text('A useful transition tells the story.',118,1318,38,C.forest,'750');
+ rounded(91,1366,900*x,8,2,C.coral);
+}
+function payoff(t){
+ const p=range(t,9.65,.62),q=range(t,10.12,.50);
+ g.save();g.globalAlpha=p;g.translate(0,(1-p)*68);
+ text('MAKE IT',90,680,155,C.forest,'900');text('MOVE.',90,873,176,C.forest,'900');g.restore();
+ rounded(92,935,888*q,26,7,C.coral);
+ g.save();g.globalAlpha=q;
+ text('HOOK  →  PROOF  →  PAYOFF',100,1154,52,C.forest,'780');
+ rounded(100,1245,825,155,22,C.mint);text('A REEL THAT TEACHES.',133,1340,48,C.forest,'830');g.restore();
+ const pulse=range(t,10.80,.32);
+ for(let i=0;i<3;i++){circle(141+i*65,1494,13,pulse*(i+1)/3>0.2?C.coral:C.paper2)}
+}
+function renderAt(t){
+ const W=canvas.width,H=canvas.height;
+ g.setTransform(W/1080,0,0,H/1920,0,0);
+ t=clamp(Number(t)||0,0,D);
+ let label=t<2?'01 / HOOK':t<4?'02 / CONTRAST':t<6.5?'03 / STRUCTURE':t<9.6?'04 / MECHANISM':'05 / PAYOFF';
+ base(t,label);
+ if(t<2)hook(t);else if(t<4)split(t);else if(t<6.5)steps(t);else if(t<9.6)mechanism(t);else payoff(t);
+}
+window.renderAt=renderAt;window.seek=renderAt;renderAt(0);
+if(!window.__REEL_OFFLINE__){const begin=performance.now();function preview(){renderAt(((performance.now()-begin)/1000)%D);requestAnimationFrame(preview)}requestAnimationFrame(preview)}
+})();
+</script></body></html>

@@ -1,0 +1,20 @@
+{
+  "duration": 12.0,
+  "sample_rate": 48000,
+  "cues": [
+    {"at":0.05,"type":"thump","gain":0.65},
+    {"at":0.62,"type":"whoosh","gain":0.32},
+    {"at":1.18,"type":"click","gain":0.52},
+    {"at":2.05,"type":"whoosh","gain":0.36},
+    {"at":2.57,"type":"pop","gain":0.32},
+    {"at":4.11,"type":"thump","gain":0.40},
+    {"at":4.72,"type":"click","gain":0.52},
+    {"at":5.38,"type":"click","gain":0.56},
+    {"at":6.54,"type":"whoosh","gain":0.28},
+    {"at":7.32,"type":"pop","gain":0.32},
+    {"at":8.18,"type":"click","gain":0.50},
+    {"at":9.62,"type":"thump","gain":0.68},
+    {"at":10.12,"type":"whoosh","gain":0.30},
+    {"at":10.88,"type":"success","gain":0.30}
+  ]
+}
